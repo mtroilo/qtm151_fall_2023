@@ -26,20 +26,16 @@ United States Congress dataset
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Create and Activate a New Database </span>
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@postgres
+-- Active: 1698692186203@@127.0.0.1@5432@postgres
 
 DROP DATABASE IF EXISTS us_congress;
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@us_congress
+CREATE DATABASE us_congress;
+-- SQLBook: Code
+-- Active: 1698692186203@@127.0.0.1@5432@us_congress
 CREATE SCHEMA bills;
 
 CREATE SCHEMA members;
--- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@formula1
-DROP TABLE IF EXISTS results;
--- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@postgres
-DROP TABLE IF EXISTS races;
 -- SQLBook: Markup
 <font size = "5">
 
@@ -47,7 +43,7 @@ DROP TABLE IF EXISTS races;
 
 - Click on the ```Active Connection``` button and choose the correct database
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@us_congress
+-- Active: 1698692186203@@127.0.0.1@5432@us_congress
 DROP TABLE IF EXISTS bills.bills_actions;
 DROP TABLE IF EXISTS bills.bills_subjects;
 DROP TABLE IF EXISTS members.us_congress_members;
@@ -62,8 +58,6 @@ DROP TABLE IF EXISTS members.us_congress_members;
 
 - See this link: https://hevodata.com/learn/postgresql-import-csv/
 
-- **Optional: we will not use it in this class**
-
 1. Using the ```COPY``` command
 
     For the instructor's computer this is:
@@ -77,7 +71,6 @@ DROP TABLE IF EXISTS members.us_congress_members;
     ```
 
     **Disadvantages:**
-    
     1.1 You have to create the tables, columns and their types manually (See Lecture 16)
 
     1.2 The column types in your CSV **must coincide precisely** with the types you define in SQL (this can be very tricky!)
@@ -146,7 +139,7 @@ SELECT * FROM schemas_name.tables_name
 ```
 -- SQLBook: Code
 -- Write your own code
-SELECT * FROM members.us_congress_members;
+
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Merge Data </span>
 
@@ -177,7 +170,6 @@ GROUP BY party_name
 
 Count members of group
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@us_congress
 SELECT party_name,       
        COUNT(*) AS num_members       
 FROM members.us_congress_members
@@ -221,13 +213,8 @@ AND schema1.table1.key1_3 = schema2.table2.key2_3;
 
 - **Hint:** the rows in the two tables are uniquely identified by the columns: ```congress```, ```bill_number```, ```bill_type```
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@us_congress
 -- Write your own code
-SELECT * FROM bills.bills_actions
-LEFT JOIN bills.bills_subjects
-ON bills.bills_actions.congress = bills.bills_subjects.congress
-AND bills.bills_actions.bill_number = bills.bills_subjects.bill_number
-AND bills.bills_actions.bill_type = bills.bills_subjects.bill_type;
+
 -- SQLBook: Markup
 # <span style="color:darkblue"> IV. (Optional) Additional Resources </span>
 
